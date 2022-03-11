@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">NewsKotlin</string>
+    <string name="big_news">Big news</string>
+    <string name="small_news">Small news</string>
+</resources>
