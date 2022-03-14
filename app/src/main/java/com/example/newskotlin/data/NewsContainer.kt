@@ -2,6 +2,8 @@ package com.example.newskotlin.data
 
 import com.example.newskotlin.model.Category
 import com.example.newskotlin.model.News
+import java.util.*
+import kotlin.collections.ArrayList
 
 class NewsContainer {
 
@@ -82,11 +84,27 @@ class NewsContainer {
             categoryList.add(Category("Zabava", "#BB86FC"))
         }
 
-        fun filterList(category: String): ArrayList<News> {
+        fun filterListByCategory(category: String): ArrayList<News> {
             var list: ArrayList<News> = ArrayList()
+
+            if (category == "all") {
+                return newsList
+            }
 
             for (news in newsList) {
                 if (news.category.name == category) {
+                    list.add(news)
+                }
+            }
+
+            return list
+        }
+
+        fun filterListByTerm(term: String): ArrayList<News> {
+            var list: ArrayList<News> = ArrayList()
+
+            for (news in newsList) {
+                if (news.title.lowercase(Locale.getDefault()).contains(term.lowercase(Locale.getDefault()))) {
                     list.add(news)
                 }
             }

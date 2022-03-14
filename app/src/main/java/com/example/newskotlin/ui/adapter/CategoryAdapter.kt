@@ -22,15 +22,20 @@ class CategoryAdapter(
     }
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
-        val category = categoryList[position]
-        holder.bindCategory(category)
+        if (position == 0) {
+            holder.viewColor.setBackgroundColor(Color.parseColor("#FFFFFF"))
+            holder.tvName.text = "All news"
+        } else {
+            val category = categoryList[position - 1]
+            holder.bindCategory(category)
+        }
     }
 
-    override fun getItemCount(): Int = categoryList.size
+    override fun getItemCount(): Int = categoryList.size + 1
 
     inner class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val viewColor: View = itemView.findViewById(R.id.viewColor)
-        private val tvName: TextView = itemView.findViewById(R.id.textViewName)
+        val viewColor: View = itemView.findViewById(R.id.viewColor)
+        val tvName: TextView = itemView.findViewById(R.id.textViewName)
 
         fun bindCategory(category: Category) {
             tvName.text = category.name
@@ -39,7 +44,11 @@ class CategoryAdapter(
 
         init {
             itemView.setOnClickListener {
-                listener(categoryList[adapterPosition].name)
+                if (adapterPosition == 0) {
+                    listener("all")
+                } else {
+                    listener(categoryList[adapterPosition - 1].name)
+                }
             }
         }
     }

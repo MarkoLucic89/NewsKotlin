@@ -32,8 +32,8 @@ class NewsAdapter(
 
     override fun getItemCount(): Int = newsList.size
 
-    fun filterList(filterCategory: ArrayList<News>) {
-        this.newsList = filterCategory
+    fun filterList(filterList: ArrayList<News>) {
+        this.newsList = filterList
         notifyDataSetChanged()
     }
 
