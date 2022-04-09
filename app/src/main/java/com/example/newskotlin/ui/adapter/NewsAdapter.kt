@@ -9,32 +9,55 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.newskotlin.R
 import com.example.newskotlin.model.News
 import com.example.newskotlin.tools.NewsClickListener
+import com.example.newskotlin.tools.NextPageListener
 import com.squareup.picasso.Picasso
 import java.util.ArrayList
 
 class NewsAdapter(
     private var newsList: List<News>,
-    private val listener: NewsClickListener,
+    private val newsClickListener: NewsClickListener,
+    private val nextPageListener: NextPageListener,
     private var layout: Int,
-) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
-        val row =
-            LayoutInflater.from(parent.context).inflate(layout, parent, false)
-        return NewsViewHolder(row)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return if (viewType == 0) {
+            val row =
+                LayoutInflater.from(parent.context).inflate(layout, parent, false)
+            NewsViewHolder(row)
+        } else {
+            val row =
+                LayoutInflater.from(parent.context).inflate(R.layout.rv_item_loading, parent, false)
+            LoadingViewHolder(row)
+        }
+
     }
 
-    override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
-        val news = newsList[position]
-        holder.bindNews(news)
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
+        if (position < newsList.size) {
+            val news = newsList[position]
+            val viewHolder: NewsViewHolder = holder as NewsViewHolder
+            viewHolder.bindNews(news)
+        } else if (position == newsList.size && position >= 5) {
+            val viewHolder: LoadingViewHolder = holder as LoadingViewHolder
+            viewHolder.loadNextPageNews()
+        }
     }
 
-    override fun getItemCount(): Int = newsList.size
+    override fun getItemCount(): Int = newsList.size + 1
 
     fun filterList(filterList: ArrayList<News>) {
         this.newsList = filterList
         notifyDataSetChanged()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        if (newsList.size >= 5 && position == newsList.size) {
+            return 1
+        }
+        return 0
     }
 
     inner class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -47,16 +70,25 @@ class NewsAdapter(
 
         init {
             itemView.setOnClickListener {
-                listener.onNewsClicked(newsList[adapterPosition])
+                newsClickListener.onNewsClicked(newsList[adapterPosition])
             }
         }
 
         fun bindNews(news: News) {
             Picasso.get().load(news.imageUrl).into(ivPicture)
-            tvCategory.text = news.category.name
+            tvCategory.text = news.category
             tvTitle.text = news.title
             tvDescription?.text = news.description
-            tvDate.text = news.date
+            tvDate.text = news.timePublished
         }
+    }
+
+    inner class LoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun loadNextPageNews() {
+            val page: Int = calculatePage(adapterPosition)
+            nextPageListener.loadNewsFromNextPage(page)
+        }
+
+        private fun calculatePage(position: Int): Int = position / 5 + 1
     }
 }

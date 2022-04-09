@@ -3,9 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/NewsKotlin/app/src/main/res/layout-land/activity_news_list.xml" value="0.43660531697341515" />
         <entry key="..\:/Users/User/AndroidStudioProjects/NewsKotlin/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/NewsKotlin/app/src/main/res/layout/activity_main_with_view_pager.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/NewsKotlin/app/src/main/res/layout/activity_news_list.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/NewsKotlin/app/src/main/res/layout/activity_splash_screen.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/NewsKotlin/app/src/main/res/layout/fragment_category.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/NewsKotlin/app/src/main/res/layout/fragment_news_list.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/NewsKotlin/app/src/main/res/layout/fragment_news_list_view_pager.xml" value="0.3625" />
         <entry key="..\:/Users/User/AndroidStudioProjects/NewsKotlin/app/src/main/res/layout/rv_item_big_news.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/NewsKotlin/app/src/main/res/layout/rv_item_category.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/NewsKotlin/app/src/main/res/layout/rv_item_loading.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/NewsKotlin/app/src/main/res/layout/rv_item_news.xml" value="0.36666666666666664" />
       </map>
     </option>

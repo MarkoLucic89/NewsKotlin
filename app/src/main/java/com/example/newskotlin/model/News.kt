@@ -7,10 +7,9 @@ class News(
     var description: String = "",
     var content: String = "",
     var imageUrl: String = "",
-    category: String,
+    var category: String = "",
     var portal: String = "",
-    var link: String = "",
-    var date: String = "",
+    var url: String = "",
+    var timePublished: String = "",
 ) : Serializable {
-    var category: Category = Category(category)
 }

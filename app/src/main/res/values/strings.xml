@@ -2,4 +2,6 @@
     <string name="app_name">NewsKotlin</string>
     <string name="big_news">Big news</string>
     <string name="small_news">Small news</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

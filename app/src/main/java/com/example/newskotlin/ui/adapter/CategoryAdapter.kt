@@ -12,7 +12,7 @@ import com.example.newskotlin.tools.CategoryClickListener
 
 class CategoryAdapter(
     private val categoryList: ArrayList<Category>,
-    private val listener: (String) -> Unit,
+    private val listener: CategoryClickListener,
 ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
@@ -38,16 +38,17 @@ class CategoryAdapter(
         val tvName: TextView = itemView.findViewById(R.id.textViewName)
 
         fun bindCategory(category: Category) {
-            tvName.text = category.name
+            tvName.text = category.title
             viewColor.setBackgroundColor(Color.parseColor(category.color))
         }
 
         init {
             itemView.setOnClickListener {
+
                 if (adapterPosition == 0) {
-                    listener("all")
+                    listener.onCategoryClicked("all")
                 } else {
-                    listener(categoryList[adapterPosition - 1].name)
+                    listener.onCategoryClicked(categoryList[adapterPosition - 1].title)
                 }
             }
         }
